@@ -12,26 +12,25 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.ListView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import es.ua.eps.filmoteca.databinding.FragmentFilmDataBinding
 
 
 const val PARAM_POSICION = "param1"
 private const val MOVIE = 123
 private var positionFilm = 0
 
+
 @Suppress("DEPRECATION")
 
 class FilmDataFragment : Fragment() {
     private var filmList: ListView ?= null
-
+    private lateinit var binding: FragmentFilmDataBinding
     //------------------------------
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -39,21 +38,22 @@ class FilmDataFragment : Fragment() {
     }
     //------------------------------
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_film_data, container, false)
+        binding = FragmentFilmDataBinding.inflate(layoutInflater)
+        return binding.root
     }
     //------------------------------
     @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         checkScreenSize()
 
         if (arguments != null){
             positionFilm = arguments?.getInt(PARAM_POSICION, -1)!!
-            Log.i("posicion","$positionFilm")
+
             if (positionFilm != -1) {
                 printFilmData(positionFilm)
-                val backToHome = activity?.findViewById<Button>(R.id.backToHome)
-                backToHome?.setOnClickListener{
+                binding.backToHome.setOnClickListener{
                     activity?.supportFragmentManager?.popBackStack()
                     mostrarBarra(false)
                 }
@@ -75,8 +75,7 @@ class FilmDataFragment : Fragment() {
     private fun checkScreenSize(){
         if(activity?.findViewById<View>(R.id.fragment_container) == null){
             printFilmData(0)
-            val home = activity?.findViewById<Button>(R.id.backToHome)
-            home?.visibility = View.INVISIBLE
+            binding.backToHome.visibility = View.INVISIBLE
         }else{
             mostrarBarra(true)
         }
@@ -86,8 +85,7 @@ class FilmDataFragment : Fragment() {
     fun setDetalleItem(position: Int, listView: ListView){
         printFilmData(position)
         positionFilm = position
-        val home = activity?.findViewById<Button>(R.id.backToHome)
-        home?.visibility = View.INVISIBLE
+        binding.backToHome.visibility = View.INVISIBLE
         filmList = listView
     }
 
@@ -118,7 +116,8 @@ class FilmDataFragment : Fragment() {
                 val gender = data?.getStringExtra("inputGender")
                 val format = data?.getStringExtra("inputFormat")
                 val comments = data?.getStringExtra("inputComment")
-                //Actualizamos los datos de la lista de película
+
+                //update film data
                 film.genre = getGenreIndex(gender!!)
                 film.format = getFormatIndex(format!!)
                 film.title = title
@@ -139,48 +138,44 @@ class FilmDataFragment : Fragment() {
 
     //------------------------------
     private fun printFilmData(position: Int){
-        // Obtenemos las referencias
+        // Get the film with the position argument
         val film = FilmDataSource.films[position]
-        val filmData = activity?.findViewById<TextView>(R.id.filmData)
-        val filmDirectorName = activity?.findViewById<TextView>(R.id.nameDirectorBladeRunner)
-        val filmYear = activity?.findViewById<TextView>(R.id.yearPublicationBladeRunner)
-        val filmGender = activity?.findViewById<TextView>(R.id.filmGenderBladeRunner)
-        val filmFormat = activity?.findViewById<TextView>(R.id.filmFormatBladeRunner)
-        val filmComment = activity?.findViewById<TextView>(R.id.filmComment)
 
-        //Print the references
-        filmData!!.text = film.title
-        filmDirectorName!!.text = film.director
-        filmYear!!.text = film.year.toString()
-        filmComment!!.text = film.comments
-        val resources: Resources = resources
-        val genderOptions = resources.getStringArray(R.array.genderOption)
-        filmGender!!.text = genderOptions[film.genre]
-        val formatOptions = resources.getStringArray(R.array.formatOption)
-        filmFormat!!.text = formatOptions[film.format]
-        val filmLink = activity?.findViewById<Button>(R.id.IMDBLink)
-        filmLink!!.setOnClickListener {
-            val linkIntent = Intent(Intent.ACTION_VIEW, Uri.parse(film.imdbUrl))
-            startActivity(linkIntent)
-        }
-        val filmImage = activity?.findViewById<ImageView>(R.id.bladeRunnerImage)
-
+        //Get the image
         if(film.imageResId != 0){
-            filmImage!!.setImageResource(film.imageResId)
+            binding.bladeRunnerImage.setImageResource(film.imageResId)
         }else{
-            Glide.with(this).load(film.imageUrl).into(filmImage!!)
+            Glide.with(this).load(film.imageUrl).into(binding.bladeRunnerImage)
         }
-        //Botón para ir a editar
-        val buttonEdit = activity?.findViewById<Button>(R.id.filmEdit)
-        buttonEdit?.setOnClickListener{
-            val filmEditIntent = Intent(activity, FilmEditActivity::class.java)
-            filmEditIntent.putExtra("position", position)
-            if(Build.VERSION.SDK_INT >= 30) {
-                startForResult.launch(filmEditIntent)
+
+        with(binding){
+            //Print the references
+            filmData.text = film.title
+            nameDirectorBladeRunner.text = film.director
+            yearPublicationBladeRunner.text = film.year.toString()
+            filmComment.text = film.comments
+            val resources: Resources = resources
+
+            val genderOptions = resources.getStringArray(R.array.genderOption)
+            filmGenderBladeRunner.text = genderOptions[film.genre]
+            val formatOptions = resources.getStringArray(R.array.formatOption)
+            filmFormatBladeRunner.text = formatOptions[film.format]
+            IMDBLink.setOnClickListener {
+                val linkIntent = Intent(Intent.ACTION_VIEW, Uri.parse(film.imdbUrl))
+                startActivity(linkIntent)
             }
-            else {
-                @Suppress("DEPRECATION")
-                startActivityForResult(filmEditIntent, MOVIE)
+
+            //------------------------------ EDIT BUTTON
+            filmEdit.setOnClickListener{
+                val filmEditIntent = Intent(activity, FilmEditActivity::class.java)
+                filmEditIntent.putExtra("position", position)
+                if(Build.VERSION.SDK_INT >= 30) {
+                    startForResult.launch(filmEditIntent)
+                }
+                else {
+                    @Suppress("DEPRECATION")
+                    startActivityForResult(filmEditIntent, MOVIE)
+                }
             }
         }
     }
