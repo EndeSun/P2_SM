@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Filmoteca</string>
+    <string name="google_map_api_key">AIzaSyAp9t614g6_3nRX8dRxviHwsd2c8ym3pQc</string>
+    <string name="author">Datos del usuario</string>
+    <string name="ir">IR AL SITIO WEB</string>
+    <string name="support">OBTENER SOPORTE</string>
+    <string name="back">VOLVER</string>
+    <string name="message">Funcionalidad 1 sin implementar</string>
+    <string name="coche">Imagen de coche</string>
+    <string name="filmA">Ver película A</string>
+    <string name="filmB">Ver película B</string>
+    <string name="about">Acerca de</string>
+
+    <string name="filmData">DATOS DE LA PELÍCULA</string>
+    <string name="relatedFilm">Ver película relacionada</string>
+    <string name="filmEdit">Editar película</string>
+    <string name="backToHome">Volver a la principal</string>
+    <string name="filmEditing">Editando película</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+
+    <string name="watchFilmA">Película A</string>
+    <string name="watchFilmB">Película B</string>
+    <string name="watchRelatedFilm">Película Relacionada</string>
+
+    <string name="filmEdited">Película editada</string>
+    <string name="filmCancel">Película cancelada</string>
+
+    <string name="director">Director:</string>
+    <string name="yearPublication">Año:</string>
+    <string name="filmGender">Género:</string>
+    <string name="filmFormat">Formato:</string>
+    <string name="IMDBLink">Ver en IMDB:</string>
+    <string name="bladeRunner">Blade Runner</string>
+
+    <string name="nameDirectorBladeRunner">Luke Scott</string>
+    <string name="yearPublicationBladeRunner">1985</string>
+    <string name="filmGenderBladeRunner">Ciencia Ficción</string>
+    <string name="filmFormatBladeRunner">Formato Extendido</string>
+
+    <string name="selectGender">Elije el género</string>
+    <string name="selectFormat">Elije el Format</string>
+
+    <string name="catchPhoto">Capturar Fotografía</string>
+    <string name="selectImage">Selecciona Imagen</string>
+    <string name="inputFilmTitle">Título de la película</string>
+    <string name="inputDirectorName">Nombre del director</string>
+    <string name="inputYear">Año</string>
+    <string name="inputLinkIMDB">Enlace a IMDB</string>
+    <string name="inputComment">Comentarios</string>
+
+    <string name="filmImageAlt">Imagen de la película</string>
+
+    <string name="menuOptionAdd">Añadir nueva película</string>
+    <string name="menuOptionAbout">Acerca de</string>
+
+    <string name="film1">Blade Runner</string>
+    <string name="film2">Regreso al futuro II</string>
+    <string name="film3">Regreso al futuro III</string>
+    <string name="film4">Los cazafantasmas</string>
+    <string name="film5">Thor</string>
+
+    <string name="selected">Seleccionado/s</string>
+    <string name="menuDeleteAll">Borrar todo</string>
+</resources>
+

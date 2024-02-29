@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".FilmDataActivity">
+
+        <ImageView
+            android:id="@+id/bladeRunnerImage"
+            android:layout_width="321dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="14dp"
+            android:contentDescription="@string/bladeRunner"
+            app:srcCompat="@drawable/blade_runner"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <TextView
+            android:id="@+id/director"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filmData"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@id/bladeRunnerImage"
+            android:text="@string/director"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="122dp" />
+
+        <TextView
+            android:id="@+id/nameDirectorBladeRunner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/director"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@id/bladeRunnerImage"
+            android:text="@string/nameDirectorBladeRunner"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="95dp" />
+
+        <TextView
+            android:id="@+id/filmData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/bladeRunnerImage"
+
+            android:minHeight="48dp"
+            android:text="@string/filmData"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <Button
+            android:id="@+id/IMDBLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filmGenderBladeRunner"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@id/bladeRunnerImage"
+            android:text="@string/IMDBLink"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="217dp"
+            tools:layout_editor_absoluteY="295dp" />
+
+        <Button
+            android:id="@+id/backToHome"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bladeRunnerImage"
+            android:layout_marginStart="-35dp"
+            android:layout_marginTop="13dp"
+            android:layout_toEndOf="@id/bladeRunnerImage"
+            android:text="@string/backToHome"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="240dp"
+            tools:layout_editor_absoluteY="391dp" />
+
+        <Button
+            android:id="@+id/filmEdit"
+            android:layout_width="224dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bladeRunnerImage"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="13dp"
+            android:layout_toEndOf="@id/backToHome"
+            android:text="@string/filmEdit"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="250dp"
+            tools:layout_editor_absoluteY="343dp" />
+
+        <TextView
+            android:id="@+id/yearPublicationBladeRunner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/yearPublication"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@id/bladeRunnerImage"
+            android:text="@string/yearPublicationBladeRunner"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="45dp" />
+
+        <TextView
+            android:id="@+id/filmGenre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/yearPublicationBladeRunner"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/bladeRunnerImage"
+            android:text="@string/filmGender"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="45dp" />
+
+        <TextView
+            android:id="@+id/filmGenderBladeRunner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filmGenre"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@id/bladeRunnerImage"
+            android:text="@string/filmGenderBladeRunner"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="45dp" />
+
+        <TextView
+            android:id="@+id/filmFormat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/IMDBLink"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@id/bladeRunnerImage"
+            android:text="@string/filmFormat"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="45dp" />
+
+        <TextView
+            android:id="@+id/filmFormatBladeRunner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filmFormat"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@id/bladeRunnerImage"
+            android:text="@string/filmFormatBladeRunner"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="45dp" />
+
+        <TextView
+            android:id="@+id/yearPublication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameDirectorBladeRunner"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@id/bladeRunnerImage"
+            android:text="@string/yearPublication"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="72dp" />
+
+    </RelativeLayout>
+</ScrollView>

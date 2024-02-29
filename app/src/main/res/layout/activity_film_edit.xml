@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FilmEditActivity">
+
+    <LinearLayout android:orientation = "horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/bladeRunnerImageEdit"
+            android:layout_width="113dp"
+            android:layout_height="75dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/bladeRunner"
+            tools:srcCompat="@drawable/blade_runner" />
+
+        <Button
+            android:id="@+id/catchPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:text="@string/catchPhoto"
+            android:textColorHighlight="#0E0D0D"
+            android:textColorLink="#1E1616"
+            android:textSize="16sp"
+            />
+
+        <Button
+            android:id="@+id/selectImage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:text="@string/selectImage"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/inputFilmTitle"
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="4dp"
+        android:autofillHints="film Title"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/inputFilmTitle"
+        android:textColorHint="#757575"
+        android:inputType="text"
+        android:minWidth="5dp"
+        android:minHeight="48dp"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/inputDirectorName"
+        android:layout_width="231dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="4dp"
+        android:autofillHints="Director name"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/inputDirectorName"
+        android:inputType="text"
+        android:minWidth="5dp"
+        android:minHeight="48dp"
+        android:textColor="#000000"
+        android:textColorHighlight="#151414"
+        android:textColorLink="#1B1919"
+        android:textColorHint="#757575"/>
+
+    <EditText
+        android:id="@+id/inputYear"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:autofillHints="year"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/inputYear"
+        android:inputType="number"
+        android:minWidth="5dp"
+        android:minHeight="48dp"
+        android:textColor="#000000"
+        android:textColorHint="#757575"/>
+
+    <EditText
+        android:id="@+id/inputLinkIMDB"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="4dp"
+        android:autofillHints="link to IMDB"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/inputLinkIMDB"
+        android:inputType="text"
+        android:minWidth="5dp"
+        android:minHeight="48dp"
+        android:textColor="#000000"
+        android:textColorHint="#757575"/>
+
+    <Spinner
+        android:id="@+id/genderOption"
+        android:layout_width="236dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF"
+        android:entries="@array/genderOption"
+        android:minWidth="5dp"
+        android:minHeight="48dp"
+        android:prompt="@string/selectGender" />
+
+    <Spinner
+        android:id="@+id/formatOption"
+        android:layout_width="236dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF"
+        android:entries="@array/formatOption"
+        android:minWidth="5dp"
+        android:minHeight="48dp"
+        android:prompt="@string/selectFormat" />
+
+    <EditText
+        android:id="@+id/inputComment"
+        android:layout_width="236dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="4dp"
+        android:autofillHints="comments"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/inputComment"
+        android:inputType="text"
+        android:minWidth="5dp"
+        android:minHeight="48dp"
+        android:textColor="#000000"
+        android:textColorHint="#757575"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:text="@string/save"
+            style="?android:attr/buttonBarButtonStyle"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name" translatable="false">Filmoteca</string>
+    <string name="google_map_api_key">AIzaSyAp9t614g6_3nRX8dRxviHwsd2c8ym3pQc</string>
+    <string name="author">UserData</string>
+    <string name="ir">go to the website</string>
+    <string name="support">help</string>
+    <string name="back">return</string>
+    <string name="message">function 1 without implement</string>
+    <string name="coche">Car image</string>
+    <string name="filmA">Watch film A</string>
+    <string name="filmB">Watch film B</string>
+    <string name="about">About</string>
+
+    <string name="filmData">INFORMATION OF THE FILM</string>
+    <string name="relatedFilm">Watch related movie</string>
+    <string name="filmEdit">Edit movie</string>
+    <string name="backToHome">Return to main</string>
+    <string name="filmEditing">Editing movie</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="watchFilmA">Movie A</string>
+    <string name="watchFilmB">Movie B</string>
+    <string name="watchRelatedFilm">Related Film</string>
+
+    <string name="filmEdited">Film edited</string>
+    <string name="filmCancel">Film canceled</string>
+
+    <string name="director">Director:</string>
+    <string name="nameDirectorBladeRunner">Luke Scott</string>
+    <string name="yearPublication">Year:</string>
+    <string name="yearPublicationBladeRunner">1985</string>
+    <string name="filmGender">Movie Genre:</string>
+    <string name="filmGenderBladeRunner">Sci-Fi</string>
+    <string name="filmFormat">Format:</string>
+    <string name="filmFormatBladeRunner">Extended format</string>
+    <string name="IMDBLink">Watch in IMDB:</string>
+    <string name="bladeRunner">Blade Runner</string>
+
+    <string name="selectGender">Select the gender</string>
+    <string name="selectFormat">Select the format</string>
+
+    <string name="catchPhoto">Take photo</string>
+    <string name="selectImage">Selecct Image</string>
+    <string name="inputFilmTitle">Film title</string>
+    <string name="inputDirectorName">Director name</string>
+    <string name="inputYear">Year</string>
+    <string name="inputLinkIMDB">Link to IMDB</string>
+    <string name="inputComment">Comment</string>
+
+    <string name="filmImageAlt">Image of the film</string>
+
+    <string name="menuOptionAdd">Add new Film</string>
+    <string name="menuOptionAbout">About</string>
+
+    <string name="film1">Blade Runner</string>
+    <string name="film2">Turn to the future II</string>
+    <string name="film3">Turn to the future III</string>
+    <string name="film4">The Ghostbusters</string>
+    <string name="film5">Thor</string>
+
+    <string name="selected">selected/s</string>
+    <string name="menuDeleteAll">Delete all</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,15 @@
+<resources>
+    <string-array name="genderOption">
+        <item>Acción</item>
+        <item>Drama</item>
+        <item>Comedia</item>
+        <item>Terror</item>
+        <item>Sci-Fi</item>
+    </string-array>
+
+    <string-array name="formatOption">
+        <item>DVD</item>
+        <item>Blu-ray</item>
+        <item>Digital</item>
+    </string-array>
+</resources>
