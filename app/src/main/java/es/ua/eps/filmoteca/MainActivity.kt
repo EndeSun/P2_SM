@@ -9,8 +9,6 @@ import es.ua.eps.filmoteca.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), FilmListFragment.OnItemSelectedListener{
 
     private lateinit var binding: ActivityMainBinding
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initUI()

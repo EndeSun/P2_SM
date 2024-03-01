@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Filmoteca</string>
+    <string name="google_map_api_key">AIzaSyAp9t614g6_3nRX8dRxviHwsd2c8ym3pQc</string>
     <string name="author">UserData</string>
     <string name="ir">go to the website</string>
     <string name="support">help</string>
@@ -60,6 +61,6 @@
 
     <string name="selected">selected/s</string>
     <string name="menuDeleteAll">Delete all</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="showMap">Show in map</string>
 </resources>

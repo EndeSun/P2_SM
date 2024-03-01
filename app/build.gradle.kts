@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+
 }
 
 android {
@@ -17,13 +19,17 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        //Properties properties = new Properties()
-        //if(rootProject.file("local.properties").exists()){
-        //    properties.load(rootProject.file("local.properties").newDataInputStream)
-        //}
 
-        //manifestPlaceholders = [mapsApiKey: properties.getProperty("MAPS_API_KEY", "")]
     }
+    signingConfigs{
+        getByName("debug"){
+            keyAlias = "AndroidDebugKey"
+            keyPassword = "1195562121"
+            storeFile = file("${rootDir}/debug.keystore")
+            storePassword = "1195562121"
+        }
+    }
+
     buildFeatures{
         viewBinding = true
     }

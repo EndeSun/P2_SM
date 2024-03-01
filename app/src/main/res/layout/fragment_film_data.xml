@@ -65,36 +65,42 @@
         app:cornerRadius="6dp"
         />
 
+    <LinearLayout
+        android:id="@+id/layout_back_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/filmComment"
+        android:gravity="center"
+        >
     <Button
         android:id="@+id/backToHome"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/filmComment"
-        android:layout_marginStart="40dp"
         android:text="@string/backToHome"
         android:backgroundTint="#838282"
         app:cornerRadius="6dp"
+        android:layout_marginEnd="4dp"
         />
 
     <Button
         android:id="@+id/filmEdit"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/filmComment"
-        android:layout_toEndOf="@id/backToHome"
-        android:layout_marginStart="20dp"
         android:text="@string/filmEdit"
         android:backgroundTint="#DC6E3B"
         app:cornerRadius="6dp"
+        android:layout_marginStart="4dp"
         />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/showMapButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/backToHome"
+        android:layout_below="@+id/layout_back_edit"
         android:layout_centerHorizontal="true"
-        android:text="Mostrar en mapa"
+        android:text="@string/showMap"
         android:backgroundTint="@color/black"
         app:cornerRadius="6dp"
         />
@@ -158,6 +164,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/filmFormatBladeRunner"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:layout_toEndOf="@+id/bladeRunnerImage"
         android:textStyle="bold"
 
@@ -195,6 +202,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="10dp"
         tools:text="Los comentarios de la película"
+
         />
 
 </RelativeLayout>

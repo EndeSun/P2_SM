@@ -61,5 +61,8 @@
 
     <string name="selected">Seleccionado/s</string>
     <string name="menuDeleteAll">Borrar todo</string>
+
+    <string name="showMap">Mostrar en mapa</string>
+
 </resources>
 

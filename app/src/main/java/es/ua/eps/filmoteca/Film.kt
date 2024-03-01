@@ -11,6 +11,9 @@ class Film {
     var format = 0
     var imdbUrl: String? = null
     var comments: String? = null
+    var latitud: Double = 0.0
+    var longitud: Double = 0.0
+
 
     override fun toString(): String {
         return title?:"<Sin titulo>" // Al convertir a cadena mostramos su título
@@ -41,6 +44,9 @@ object FilmDataSource {
         f1.genre = Film.GENRE_SCIFI
         f1.imdbUrl = "https://www.imdb.com/title/tt0083658/?ref_=fn_al_tt_1"
         f1.year = 1982
+        f1.latitud = 23.40
+        f1.longitud = 120.20
+
         val f2 = Film()
         f2.title = "Regreso al futuro II"
         f2.director = "Robert Zemeckis"
@@ -50,6 +56,9 @@ object FilmDataSource {
         f2.genre = Film.GENRE_SCIFI
         f2.imdbUrl = "https://www.imdb.com/title/tt0096874/?ref_=fn_al_tt_3"
         f2.year = 1989
+        f2.latitud = 23.80
+        f2.longitud = 70.00
+
         val f3 = Film()
         f3.title = "Regreso al futuro III"
         f3.director = "Robert Zemeckis"
@@ -59,6 +68,9 @@ object FilmDataSource {
         f3.genre = Film.GENRE_ACTION
         f3.imdbUrl = "https://www.imdb.com/title/tt0099088/?ref_=fn_al_tt_4"
         f3.year = 1990
+        f3.latitud = -30.10
+        f3.longitud = 120.00
+
         val f4 = Film()
         f4.title = "Regreso al futuro"
         f4.director = "Ivan Reitman"
@@ -68,6 +80,9 @@ object FilmDataSource {
         f4.genre = Film.GENRE_SCIFI
         f4.imdbUrl = "https://www.imdb.com/title/tt4513678/"
         f4.year = 1984
+        f4.latitud = 30.40
+        f4.longitud = 12.70
+
 
         films.add(f1)
         films.add(f2)

@@ -6,7 +6,6 @@ import android.content.res.Resources
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -96,7 +95,6 @@ class FilmDataFragment : Fragment() {
             onActivityResult(MOVIE, result.resultCode, result.data)
         }
     @Deprecated("Deprecated in Java")
-
     //------------------------------
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         @Suppress("DEPRECATION")
@@ -104,8 +102,8 @@ class FilmDataFragment : Fragment() {
         if(requestCode == MOVIE){
             if (resultCode == Activity.RESULT_OK){
                 val film = FilmDataSource.films[positionFilm]
-                Log.i("Prueba","$positionFilm")
-                //Recibimos los datos
+
+                //Receive the film information
                 val title = data?.getStringExtra("inputFilmTitle")
                 val director = data?.getStringExtra("inputDirectorName")
                 val year = data?.getIntExtra("inputYear", R.string.yearPublicationBladeRunner)
@@ -126,7 +124,7 @@ class FilmDataFragment : Fragment() {
                 film.comments = comments
 
                 val adapter = FilmsArrayAdapter(context, R.layout.item_film, FilmDataSource.films)
-                filmList?.adapter = adapter
+                adapter.notifyDataSetChanged()
 
                 printFilmData(positionFilm)
             }
@@ -154,8 +152,11 @@ class FilmDataFragment : Fragment() {
             nameDirectorBladeRunner.text = film.director
             yearPublicationBladeRunner.text = film.year.toString()
             filmComment.text = film.comments
-            val resources: Resources = resources
+            latitudFilm.text = "${latitudFilm.text} ${film.latitud}"
+            longitudFilm.text = "${longitudFilm.text} ${film.longitud}"
 
+
+            val resources: Resources = resources
             val genderOptions = resources.getStringArray(R.array.genderOption)
             filmGenderBladeRunner.text = genderOptions[film.genre]
             val formatOptions = resources.getStringArray(R.array.formatOption)
@@ -177,11 +178,26 @@ class FilmDataFragment : Fragment() {
                     startActivityForResult(filmEditIntent, MOVIE)
                 }
             }
+
+            showMapButton.setOnClickListener {
+                val intentMap = Intent(context, MapActivity::class.java)
+
+                intentMap.putExtra("latitud", film.latitud)
+                intentMap.putExtra("longitud", film.longitud)
+                intentMap.putExtra("title", film.title)
+                intentMap.putExtra("director", film.director)
+                intentMap.putExtra("year", film.year)
+
+
+                startActivity(intentMap)
+            }
         }
     }
 
 
 
+    //------------------------------
+    //------------------------------
     //------------------------------
     private fun getGenreIndex(genre: String): Int {
         val resources = resources
@@ -191,7 +207,7 @@ class FilmDataFragment : Fragment() {
                 return i
             }
         }
-        return -1 // Valor predeterminado si no se encuentra el género
+        return -1 //Default value
     }
     //------------------------------
     private fun getFormatIndex(format: String): Int {
@@ -202,7 +218,7 @@ class FilmDataFragment : Fragment() {
                 return i
             }
         }
-        return -1 // Valor predeterminado si no se encuentra el formato
+        return -1 //Default value
     }
 
     //------------------------------
