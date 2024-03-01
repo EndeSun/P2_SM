@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Filmoteca</string>
-    <string name="google_map_api_key">AIzaSyAp9t614g6_3nRX8dRxviHwsd2c8ym3pQc</string>
     <string name="author">Datos del usuario</string>
     <string name="ir">IR AL SITIO WEB</string>
     <string name="support">OBTENER SOPORTE</string>
