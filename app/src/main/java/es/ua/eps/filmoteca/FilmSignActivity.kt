@@ -24,6 +24,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.android.gms.tasks.OnCompleteListener
 
 
+@Suppress("DEPRECATION")
 class FilmSignActivity : AppCompatActivity() {
 
 
@@ -93,6 +94,7 @@ class FilmSignActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {

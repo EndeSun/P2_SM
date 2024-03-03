@@ -152,8 +152,8 @@ class FilmDataFragment : Fragment() {
             nameDirectorBladeRunner.text = film.director
             yearPublicationBladeRunner.text = film.year.toString()
             filmComment.text = film.comments
-            latitudFilm.text = "Latitud ${film.latitud}"
-            longitudFilm.text = "Longitud ${film.longitud}"
+            latitudFilm.text = getString(R.string.latitude_placeholder, film.latitud)
+            longitudFilm.text = getString(R.string.longitude_placeholder, film.longitud)
 
             val resources: Resources = resources
             val genderOptions = resources.getStringArray(R.array.genderOption)

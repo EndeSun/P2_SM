@@ -65,4 +65,11 @@
 
     <string name="geocercadoAdd">Add geofencing</string>
     <string name="geocercadoDelete">Delete geofencing</string>
+
+    <string name="user_id_format">User ID: %s</string>
+    <string name="user_name_format">User Name: %s</string>
+    <string name="user_email_format">User Email: %s</string>
+
+    <string name="latitude_placeholder">Latitud %.2f</string>
+    <string name="longitude_placeholder">Longitud %.2f</string>
 </resources>

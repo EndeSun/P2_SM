@@ -35,7 +35,7 @@ class Film {
 
 
 object FilmDataSource {
-    val films: MutableList<Film> = mutableListOf<Film>()
+    val films: MutableList<Film> = mutableListOf()
     init {
         val f1 = Film()
         f1.title = "Blade runner"

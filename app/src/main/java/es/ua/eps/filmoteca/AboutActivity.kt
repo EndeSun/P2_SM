@@ -45,16 +45,16 @@ class AboutActivity : AppCompatActivity() {
             }
 
             if(account != null){
-                userId.text = userId.text.toString() +  account.id
-                userName.text = userName.text.toString() + account.displayName
-                userEmail.text = userEmail.text.toString() + account.email
+                userId.text = getString(R.string.user_id_format, account.id)
+                userName.text = getString(R.string.user_name_format, account.displayName)
+                userEmail.text = getString(R.string.user_email_format, account.email)
                 Glide.with(applicationContext).load(account.photoUrl).into(userImage)
             }
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id: Int = item.getItemId()
+        val id: Int = item.itemId
         //special id for the home button
         if (id == android.R.id.home) {
             NavUtils.navigateUpTo(this,
