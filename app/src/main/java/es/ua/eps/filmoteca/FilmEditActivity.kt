@@ -12,6 +12,7 @@ import android.provider.MediaStore
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -54,6 +55,28 @@ class FilmEditActivity : AppCompatActivity() {
             inputLinkIMDB.setText(film.imdbUrl)
             inputDirectorName.setText(film.director)
             inputYear.setText(film.year.toString())
+
+            //------------------------------
+            if(film.geocercado){
+                geocercado.setText(R.string.geocercadoDelete)
+                geocercado.setBackgroundColor(getColor(R.color.deleteGeofencing))
+            }else{
+                geocercado.setText(R.string.geocercadoAdd)
+                geocercado.setBackgroundColor(getColor(R.color.addGeofencing))
+            }
+
+            geocercado.setOnClickListener {
+                if (film.geocercado) {
+                    geocercado.setText(R.string.geocercadoAdd)
+                    geocercado.setBackgroundColor(getColor(R.color.addGeofencing))
+                    Toast.makeText(applicationContext, "Geocercado eliminado", Toast.LENGTH_SHORT).show()
+                } else {
+                    geocercado.setText(R.string.geocercadoDelete)
+                    geocercado.setBackgroundColor(getColor(R.color.deleteGeofencing))
+                    Toast.makeText(applicationContext, "Geocercado agregado", Toast.LENGTH_SHORT).show()
+                }
+                film.geocercado = !film.geocercado
+            }
             //------------------------------
             save.setOnClickListener {
                 val intentInfoChange = Intent()

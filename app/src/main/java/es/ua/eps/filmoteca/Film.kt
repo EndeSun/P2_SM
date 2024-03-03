@@ -13,6 +13,8 @@ class Film {
     var comments: String? = null
     var latitud: Double = 0.0
     var longitud: Double = 0.0
+    var geocercado:Boolean = false
+
 
 
     override fun toString(): String {
@@ -46,6 +48,8 @@ object FilmDataSource {
         f1.year = 1982
         f1.latitud = 23.40
         f1.longitud = 120.20
+        f1.geocercado = false
+
 
         val f2 = Film()
         f2.title = "Regreso al futuro II"
@@ -58,6 +62,8 @@ object FilmDataSource {
         f2.year = 1989
         f2.latitud = 23.80
         f2.longitud = 70.00
+        f2.geocercado = true
+
 
         val f3 = Film()
         f3.title = "Regreso al futuro III"
@@ -70,6 +76,8 @@ object FilmDataSource {
         f3.year = 1990
         f3.latitud = -30.10
         f3.longitud = 120.00
+        f3.geocercado = true
+
 
         val f4 = Film()
         f4.title = "Regreso al futuro"
@@ -82,6 +90,8 @@ object FilmDataSource {
         f4.year = 1984
         f4.latitud = 30.40
         f4.longitud = 12.70
+        f4.geocercado = false
+
 
 
         films.add(f1)

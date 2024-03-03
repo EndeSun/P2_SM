@@ -62,4 +62,7 @@
     <string name="menuDeleteAll">Delete all</string>
 
     <string name="showMap">Show in map</string>
+
+    <string name="geocercadoAdd">Add geofencing</string>
+    <string name="geocercadoDelete">Delete geofencing</string>
 </resources>

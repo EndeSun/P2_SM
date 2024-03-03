@@ -218,8 +218,10 @@ class FilmListFragment : ListFragment(), MessageListener {
             f5.genre = Film.GENRE_ACTION
             f5.imdbUrl = "https://www.imdb.com/title/tt0800369/?ref_=fn_al_tt_1"
             f5.year = 2011
-            f5.latitud = 100.00
+            f5.latitud = 40.00
             f5.longitud = 40.00
+            f5.geocercado = false
+
             FilmDataSource.films.add(f5)
             (listView.adapter as FilmsArrayAdapter).notifyDataSetChanged()
             true

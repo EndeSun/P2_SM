@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "es.ua.eps.filmoteca"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "es.ua.eps.filmoteca"
@@ -50,19 +50,18 @@ android {
 }
 
 dependencies {
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.2")
-    implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
+    implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
     /*Corrutinas*/
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     /*Dependencias para el firebase*/
     implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
@@ -73,13 +72,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     /*Servicio de sign in (deprecado)*/
     implementation("com.google.android.gms:play-services-auth:21.0.0")
-
-    /* Dependencia necesarias para credentials manager */
-    implementation("androidx.credentials:credentials:1.0.0-alpha02")
-    implementation("androidx.credentials:credentials-play-services-auth:1.0.0-alpha02")
-    /* Dependencia de google sign in*/
-    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
-
     /* Glide for image */
     implementation("com.github.bumptech.glide:glide:4.14.2")
 

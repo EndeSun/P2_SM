@@ -64,5 +64,8 @@
 
     <string name="showMap">Mostrar en mapa</string>
 
+    <string name="geocercadoAdd">Añadir geocercado</string>
+    <string name="geocercadoDelete">Eliminar geocercado</string>
+
 </resources>
 
