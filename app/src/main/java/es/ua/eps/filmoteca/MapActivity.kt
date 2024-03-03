@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
@@ -27,6 +28,7 @@ import es.ua.eps.filmoteca.databinding.ActivityMapBinding
 
 const val GEOFENCE_RADIUS = 500.00
 const val LOCATION_REQUEST_CODE = 111
+const val FINE_LOCATION_ACCESS_REQUEST_CODE = 222
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private var latitud: Double = 0.0
@@ -47,11 +49,19 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+        checkPermission()
+    }
+
+    private fun setupMap() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) { return }
+        map.isMyLocationEnabled = true
         val location = LatLng(latitud, longitud)
         val marker = MarkerOptions().position(location).title(title)
         map.addMarker(marker)
         map.setInfoWindowAdapter(MyInfoWindowAdapter())
-        map.moveCamera(CameraUpdateFactory.newLatLng(LatLng(latitud, longitud)))
+        map.moveCamera(CameraUpdateFactory.newLatLng(location))
         addCircle(location, GEOFENCE_RADIUS)
     }
 
@@ -130,4 +140,33 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         return super.onOptionsItemSelected(item)
     }
     //-------------------------------------------------------
+    //Check Permission
+    private fun isLocationPermissionGranted() : Boolean {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
+    //-------------------------------------------------------
+    //Request permission
+    private fun checkPermission(){
+        if (!isLocationPermissionGranted()) {
+            val permissions = mutableListOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+            )
+            ActivityCompat.requestPermissions(this, permissions.toTypedArray(), LOCATION_REQUEST_CODE)
+        } else {
+            setupMap()
+        }
+    }
+    //-------------------------------------------------------
+    //Manage the permission result
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == LOCATION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                setupMap()
+            }
+        }
+    }
+
 }
