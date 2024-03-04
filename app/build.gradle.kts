@@ -78,4 +78,6 @@ dependencies {
     /* Dependencias para los mapas */
     implementation("com.google.android.gms:play-services-maps:18.2.0")
 
+    //Dependency for the geolocation
+    implementation("com.google.android.gms:play-services-location:21.1.0")
 }

@@ -15,6 +15,8 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
+import com.google.android.gms.location.GeofencingClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter
@@ -37,6 +39,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private var director: String? = ""
     private var year: Int = 0
     private lateinit var binding : ActivityMapBinding
+    private lateinit var geofencingClient: GeofencingClient
     //-------------------------------------------------------
     //-------------------------------------------------------
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +64,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         val marker = MarkerOptions().position(location).title(title)
         map.addMarker(marker)
         map.setInfoWindowAdapter(MyInfoWindowAdapter())
-        map.moveCamera(CameraUpdateFactory.newLatLng(location))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12F))
         addCircle(location, GEOFENCE_RADIUS)
     }
 
@@ -83,6 +86,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         year = intent.getIntExtra("year",0)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        geofencingClient = LocationServices.getGeofencingClient(this)
     }
     //-------------------------------------------------------
     //Add Circle at the map.
