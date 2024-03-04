@@ -1,21 +1,25 @@
 package es.ua.eps.filmoteca
 
 import android.Manifest
+import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
+import com.google.android.gms.location.Geofence
+import com.google.android.gms.location.GeofenceStatusCodes
 import com.google.android.gms.location.GeofencingClient
+import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -28,9 +32,11 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import es.ua.eps.filmoteca.databinding.ActivityMapBinding
 
-const val GEOFENCE_RADIUS = 500.00
+
 const val LOCATION_REQUEST_CODE = 111
-const val FINE_LOCATION_ACCESS_REQUEST_CODE = 222
+const val GEOFENCE_LOCATION_REQUEST_CODE = 333
+const val GEOFENCE_ID = "SOME_GEOFENCE_ID"
+const val ACTION_GEOFENCE_EVENT = "com.tuapp.ACCION_GEOFENCE_EVENT"
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private var latitud: Double = 0.0
@@ -40,6 +46,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private var year: Int = 0
     private lateinit var binding : ActivityMapBinding
     private lateinit var geofencingClient: GeofencingClient
+    private val GEOFENCE_RADIUS = 500.00
     //-------------------------------------------------------
     //-------------------------------------------------------
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,9 +71,61 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         val marker = MarkerOptions().position(location).title(title)
         map.addMarker(marker)
         map.setInfoWindowAdapter(MyInfoWindowAdapter())
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12F))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15F))
         addCircle(location, GEOFENCE_RADIUS)
+        createGeoFence(location, GEOFENCE_RADIUS)
     }
+    //-------------------------------------------------------
+    //Create the geofence
+    private fun createGeoFence(location: LatLng, radius: Double) {
+        val geofence = Geofence.Builder()
+            .setRequestId(GEOFENCE_ID)
+            .setCircularRegion(location.latitude, location.longitude, radius.toFloat())
+            .setExpirationDuration(Geofence.NEVER_EXPIRE)
+            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_DWELL or Geofence.GEOFENCE_TRANSITION_EXIT)
+            .setLoiteringDelay(5000)
+            .build()
+
+        val geofenceRequest = GeofencingRequest.Builder()
+            .addGeofence(geofence)
+            .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+            .build()
+
+        //The information is saved at the pendingIntent
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), GEOFENCE_LOCATION_REQUEST_CODE)
+            } else {
+                geofencingClient.addGeofences(geofenceRequest, geofencePendingIntent).run {
+                    addOnSuccessListener {
+                        Log.d("Añadido", "Añadido")
+                    }
+                    addOnFailureListener {
+                        Log.d("Fallido", "Fallido")
+
+                    }
+                }
+            }
+        } else {
+            geofencingClient.addGeofences(geofenceRequest, geofencePendingIntent).run {
+                addOnSuccessListener {
+                    Log.d("Añadido", "Añadido")
+                }
+                addOnFailureListener {
+                    Log.d("Fallido", "Fallido")
+
+                }
+            }
+        }
+    }
+
+    private val geofencePendingIntent: PendingIntent by lazy {
+        val intent = Intent(this, GeofenceBroadcastReceiver::class.java)
+        intent.action = GeofenceBroadcastReceiver.ACTION_GEOFENCE_EVENT
+        PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_MUTABLE)
+    }
+
+
 
 
 
@@ -173,5 +232,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
-
+    //-------------------------------------------------------
+    //Geofence error
 }
