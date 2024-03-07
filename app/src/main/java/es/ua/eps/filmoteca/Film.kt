@@ -60,8 +60,8 @@ object FilmDataSource {
         f2.genre = Film.GENRE_SCIFI
         f2.imdbUrl = "https://www.imdb.com/title/tt0096874/?ref_=fn_al_tt_3"
         f2.year = 1989
-        f2.latitud = 23.80
-        f2.longitud = 70.00
+        f2.latitud = 23.40
+        f2.longitud = 120.20
         f2.geocercado = true
 
 
@@ -74,8 +74,8 @@ object FilmDataSource {
         f3.genre = Film.GENRE_ACTION
         f3.imdbUrl = "https://www.imdb.com/title/tt0099088/?ref_=fn_al_tt_4"
         f3.year = 1990
-        f3.latitud = -30.10
-        f3.longitud = 120.00
+        f3.latitud = 23.40
+        f3.longitud = 120.20
         f3.geocercado = true
 
 
@@ -88,11 +88,9 @@ object FilmDataSource {
         f4.genre = Film.GENRE_SCIFI
         f4.imdbUrl = "https://www.imdb.com/title/tt4513678/"
         f4.year = 1984
-        f4.latitud = 30.40
-        f4.longitud = 12.70
+        f4.latitud = 23.40
+        f4.longitud = 120.20
         f4.geocercado = false
-
-
 
         films.add(f1)
         films.add(f2)

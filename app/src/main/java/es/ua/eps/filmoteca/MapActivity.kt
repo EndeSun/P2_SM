@@ -1,6 +1,7 @@
 package es.ua.eps.filmoteca
 
 import android.Manifest
+import android.app.Activity
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,16 +9,20 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.Geofence
-import com.google.android.gms.location.GeofenceStatusCodes
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
@@ -36,7 +41,8 @@ import es.ua.eps.filmoteca.databinding.ActivityMapBinding
 const val LOCATION_REQUEST_CODE = 111
 const val GEOFENCE_LOCATION_REQUEST_CODE = 333
 const val GEOFENCE_ID = "SOME_GEOFENCE_ID"
-const val ACTION_GEOFENCE_EVENT = "com.tuapp.ACCION_GEOFENCE_EVENT"
+const val PENDING_CODE = 0
+const val RADIUS_CODE = 444
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private var latitud: Double = 0.0
@@ -46,9 +52,14 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private var year: Int = 0
     private lateinit var binding : ActivityMapBinding
     private lateinit var geofencingClient: GeofencingClient
-    private val GEOFENCE_RADIUS = 500.00
+    private var hasGeofence: Boolean = false
+
     //-------------------------------------------------------
     //-------------------------------------------------------
+    companion object{
+        private const val change_geofence_param = Menu.FIRST
+        var GEOFENCE_RADIUS: Double = 500.00
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapBinding.inflate(layoutInflater)
@@ -66,14 +77,22 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
             && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
         ) { return }
+        map.clear()
         map.isMyLocationEnabled = true
         val location = LatLng(latitud, longitud)
         val marker = MarkerOptions().position(location).title(title)
         map.addMarker(marker)
         map.setInfoWindowAdapter(MyInfoWindowAdapter())
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15F))
-        addCircle(location, GEOFENCE_RADIUS)
-        createGeoFence(location, GEOFENCE_RADIUS)
+
+        if(hasGeofence){
+            Toast.makeText(this, "Geocercado activado", Toast.LENGTH_SHORT).show()
+            createGeoFence(location, GEOFENCE_RADIUS)
+            addCircle(location, GEOFENCE_RADIUS)
+        }else{
+            Toast.makeText(this, "Esta película no tiene geocercado", Toast.LENGTH_SHORT).show()
+        }
+
     }
     //-------------------------------------------------------
     //Create the geofence
@@ -122,7 +141,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private val geofencePendingIntent: PendingIntent by lazy {
         val intent = Intent(this, GeofenceBroadcastReceiver::class.java)
         intent.action = GeofenceBroadcastReceiver.ACTION_GEOFENCE_EVENT
-        PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_MUTABLE)
+        val flags : Int = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+        PendingIntent.getBroadcast(this, PENDING_CODE, intent, flags)
     }
 
 
@@ -143,6 +163,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         title = intent?.getStringExtra("title")
         director = intent?.getStringExtra("director")
         year = intent.getIntExtra("year",0)
+        hasGeofence = intent.getBooleanExtra("geofence", false)
+
         val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
@@ -182,7 +204,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             infoView.addView(yearTextView)
             return infoView
         }
-
         override fun getInfoWindow(marker: Marker): View? {
             return null
         }
@@ -233,5 +254,48 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
     //-------------------------------------------------------
-    //Geofence error
+    //MENU OPTIONS
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val groupId = Menu.NONE //Menu unique id
+        val itemId = change_geofence_param
+        val itemOrder = Menu.NONE
+        // Menu option label
+        val itemText = "Geofence Settings"
+        val groupId2 = Menu.NONE
+        val itemSetting = menu.add(groupId, itemId, itemOrder, itemText)
+
+        itemSetting.setOnMenuItemClickListener {
+            val intent = Intent(this, GeofenceSettingsActivity::class.java)
+            if(Build.VERSION.SDK_INT >= 30) {
+                startForResult.launch(intent)
+            }
+            else {
+                @Suppress("DEPRECATION")
+                startActivityForResult(intent, RADIUS_CODE)
+            }
+
+            true
+        }
+        super.onCreateOptionsMenu(menu)
+        return true
+    }
+    //-------------------------------------------------------
+    //Manage menuoptions
+    @Suppress("DEPRECATION")
+    private val startForResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            onActivityResult(RADIUS_CODE, result.resultCode, result.data)
+        }
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        @Suppress("DEPRECATION")
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == RADIUS_CODE){
+            if (resultCode == Activity.RESULT_OK){
+                GEOFENCE_RADIUS = data?.getDoubleExtra("geofenceRadius", 500.00)!!
+                setupMap()
+            }
+        }
+    }
 }

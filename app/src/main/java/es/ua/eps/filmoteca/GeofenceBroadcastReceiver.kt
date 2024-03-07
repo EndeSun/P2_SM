@@ -32,8 +32,9 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
             Geofence.GEOFENCE_TRANSITION_ENTER -> {
                 Log.d(TAG, "Entered geofence")
                 Toast.makeText(context, "Entered geofence", Toast.LENGTH_SHORT).show()
+
                 notificationHelper.sendHighPriorityNotification(
-                    "Entered geofence", "",
+                    "Entered geofence", "Has entrado en el geocercado",
                     MapActivity::class.java
                 )
             }
@@ -41,7 +42,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
                 Log.d(TAG, "Dwelling in geofence")
                 Toast.makeText(context, "Dwelling in geofence", Toast.LENGTH_SHORT).show()
                 notificationHelper.sendHighPriorityNotification(
-                    "Dwelling in geofence", "",
+                    "Entered geofence", "Estás moviendote dentro del geocercado",
                     MapActivity::class.java
                 )
             }
@@ -49,7 +50,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
                 Log.d(TAG, "Exited geofence")
                 Toast.makeText(context, "Exited geofence", Toast.LENGTH_SHORT).show()
                 notificationHelper.sendHighPriorityNotification(
-                    "Exited geofence", "",
+                    "Entered geofence", "Has salido del geocercado",
                     MapActivity::class.java
                 )
             }

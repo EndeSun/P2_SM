@@ -186,15 +186,11 @@ class FilmDataFragment : Fragment() {
                 intentMap.putExtra("title", film.title)
                 intentMap.putExtra("director", film.director)
                 intentMap.putExtra("year", film.year)
-
-
+                intentMap.putExtra("geofence", film.geocercado)
                 startActivity(intentMap)
             }
         }
     }
-
-
-
     //------------------------------
     //------------------------------
     //------------------------------

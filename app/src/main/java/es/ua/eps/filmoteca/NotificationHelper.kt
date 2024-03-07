@@ -15,7 +15,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import java.util.Random
+const val PENDING_INTENT_CODE = 267
 class NotificationHelper(base: Context?) : ContextWrapper(base) {
+
     private val CHANNEL_NAME = "High priority channel"
     private val CHANNEL_ID = "com.example.notifications$CHANNEL_NAME"
 
@@ -39,9 +41,10 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
     }
 
     fun sendHighPriorityNotification(title: String?, body: String?, activityName: Class<*>?) {
-        val intent = Intent(this, activityName)
+        val intent = Intent(applicationContext, activityName)
+
         val pendingIntent =
-            PendingIntent.getActivity(this, 267, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getActivity(this, PENDING_INTENT_CODE, intent, PendingIntent.FLAG_MUTABLE)
         val notification: Notification =
             NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)

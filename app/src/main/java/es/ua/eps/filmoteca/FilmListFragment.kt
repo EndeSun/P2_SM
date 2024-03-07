@@ -38,7 +38,6 @@ class FilmListFragment : ListFragment(), MessageListener {
         private const val closeSession = Menu.FIRST + 1
         private const val discconectAccount = Menu.FIRST + 2
         private const val about = Menu.FIRST + 3
-
     }
 
 
@@ -220,8 +219,8 @@ class FilmListFragment : ListFragment(), MessageListener {
             f5.genre = Film.GENRE_ACTION
             f5.imdbUrl = "https://www.imdb.com/title/tt0800369/?ref_=fn_al_tt_1"
             f5.year = 2011
-            f5.latitud = 40.00
-            f5.longitud = 40.00
+            f5.latitud = 23.40
+            f5.longitud = 120.20
             f5.geocercado = false
 
             FilmDataSource.films.add(f5)
