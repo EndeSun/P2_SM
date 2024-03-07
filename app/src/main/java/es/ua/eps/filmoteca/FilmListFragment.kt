@@ -67,16 +67,19 @@ class FilmListFragment : ListFragment(), MessageListener {
         val messageFormat = message.data["Format"]
         val messageComments = message.data["Comments"]
 
+        val messageLatitud = message.data["Latitud"]
+        val messageLongitud = message.data["Longitud"]
+        val messageGeofence = message.data["Geofence"]
 
         val filmExists = FilmDataSource.films.any { it.title.toString() == messageBody }
 
         if (isNewFilm) {
             if (filmExists) {
                 // Existing film found, update
-                updateFilm(messageBody, messagePhoto, messageDirector, messageYear, messageGenre, messageIMDB, messageFormat,messageComments)
+                updateFilm(messageBody, messagePhoto, messageDirector, messageYear, messageGenre, messageIMDB, messageFormat,messageComments, messageLatitud, messageLongitud, messageGeofence)
             } else {
                 // Film doesn't exist, add
-                addFilm(messageBody, messagePhoto, messageDirector, messageYear, messageGenre, messageIMDB, messageFormat,messageComments)
+                addFilm(messageBody, messagePhoto, messageDirector, messageYear, messageGenre, messageIMDB, messageFormat,messageComments,messageLatitud, messageLongitud, messageGeofence)
             }
         } else {
             // Handle film deletion
@@ -86,7 +89,7 @@ class FilmListFragment : ListFragment(), MessageListener {
         }
     }
     //---------------------------------
-    private fun updateFilm(title: String?, imageUrl: Uri?, director: String?, year: String?, genre: String?, imdb: String?, format: String?, comments: String?) {
+    private fun updateFilm(title: String?, imageUrl: Uri?, director: String?, year: String?, genre: String?, imdb: String?, format: String?, comments: String?, latitud: String?, longitud: String?, hasGeofence: String? = "false") {
         val existingFilm = FilmDataSource.films.find { it.title.toString() == title }
         existingFilm?.apply {
             // Update film properties as needed
@@ -104,12 +107,22 @@ class FilmListFragment : ListFragment(), MessageListener {
             }
             this.comments = comments
             imageUrl?.let { this.imageUrl = it.toString() }
+
+            if (latitud != null) {
+                this.latitud = latitud.toDouble()
+            }
+
+            if (longitud != null) {
+                this.longitud = longitud.toDouble()
+            }
+
+            this.geocercado = hasGeofence.toBoolean()
         }
 
         (listView.adapter as FilmsArrayAdapter).notifyDataSetChanged()
     }
     //---------------------------------
-    private fun addFilm(title: String?, imageUrl: Uri?, director: String?, year: String?, genre: String?, imdb: String?, format: String?, comments: String?) {
+    private fun addFilm(title: String?, imageUrl: Uri?, director: String?, year: String?, genre: String?, imdb: String?, format: String?, comments: String?, latitud: String?, longitud: String?, hasGeofence: String?) {
         //New film
         val f5 = Film().apply {
             this.title = title
@@ -126,6 +139,16 @@ class FilmListFragment : ListFragment(), MessageListener {
             }
             this.comments = comments
             imageUrl?.let {film -> this.imageUrl = film.toString() }
+
+            if (latitud != null) {
+                this.latitud = latitud.toDouble()
+            }
+
+            if (longitud != null) {
+                this.longitud = longitud.toDouble()
+            }
+
+            this.geocercado = hasGeofence.toBoolean()
         }
         FilmDataSource.films.add(f5)
         (listView.adapter as FilmsArrayAdapter).notifyDataSetChanged()

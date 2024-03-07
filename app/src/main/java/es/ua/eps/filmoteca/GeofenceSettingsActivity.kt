@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.core.app.NavUtils
 import es.ua.eps.filmoteca.databinding.ActivityGeofenceSettingsBinding
 
@@ -25,12 +24,12 @@ class GeofenceSettingsActivity : AppCompatActivity() {
 
     //-------------------------------------------------------
     private fun initUI(){
-        var radiusGeofence = MapActivity.GEOFENCE_RADIUS
-        binding.tvRadius.setText("${radiusGeofence}")
+        val radiusGeofence = MapActivity.GEOFENCE_RADIUS
+        binding.tvRadius.setText("$radiusGeofence")
         binding.buttonChangeRadius.setOnClickListener {
-            val RadiusSize = binding.tvRadius.text.toString()
+            val radiusSize = binding.tvRadius.text.toString()
             val intentInfoChange = Intent()
-            intentInfoChange.putExtra("geofenceRadius", RadiusSize.toDouble())
+            intentInfoChange.putExtra("geofenceRadius", radiusSize.toDouble())
             setResult(Activity.RESULT_OK, intentInfoChange)
             finish()
         }
